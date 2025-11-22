@@ -182,11 +182,116 @@ background-color: var(--cor-fundo-primaria);
 }
 
 .opening-hours-section {
-    padding: 40px 20px 0;
-    background-color: var(--cor-fundo-primaria);
-    text-align: center;
-    color: var(--cor-texto-claro);
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 0 0 2px var(--cor-fundo-secundaria),
+    0 0 0 4px rgba(0, 255, 255, 0.3),
+    0 0 20px rgba(0, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+   
 }
+
+/* O CONTAINER PRINCIPAL DO WIDGET */
+
+.hours-content {
+    width: 100%;
+    max-width: 450px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #12283a;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(255, 255, 255, 0.1);
+
+}
+.status-indicator {
+    /* Estilos de Aparência Digital e Tamanho */
+
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-align: center;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+
+    /* Configuração padrão (FECHADO) - Fundo Escuro com Brilho Vermelho */
+    background-color: #1a0000;
+    color: var(--cor-acento-vermelho);
+    border: 2px solid var(--cor-acento-vermelho);
+
+    /* Efeito de Brilho Neon Fiel à Imagem */
+
+    box-shadow: 0 015px var(--cor-acento-vermelho),
+    0 0 25px var(--cor-acento-vermelho),
+    0 0 40px rgba(216, 30, 91, 0.4);
+    text-shadow: 0 0 8px rgba(216, 30, 91, 0.8),
+    0 0 15px rgba(216, 30, 91, 0.5);
+
+}
+
+/* ESTILO ABERTO (ATIVADO FUTURAMENTE VIA JAVASCRIPT) */
+
+.status-widget.is-open .status-indicator {
+    background-color: #1a1a00;
+    color: var(--cor-destaque-amarelo);
+    box-shadow: 0 0 15px var(--cor-destaque-amarelo),
+                0 0 25px var(--cor-destaque-amarelo),
+                0 0 40px rgba(255, 199, 44, 0.4);
+                text-shadow: 0 0 8px rgba(255, 199, 44, 0.8),
+                0 0 15px rgba(255, 199, 44, 0.5);
+}
+
+/* DETALHES DO HORÁRIO E LINHAS PONTILHADAS */
+
+.schedule-details p {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.schedule-details p:last-child {
+    border-bottom: none;
+    margin-bottom: 20px;
+}
+
+.schedule-details span {
+    font-weight: 300;
+}
+
+.hours-time {
+    font-size: 1.2rem;
+    color: var(--cor-destaque-amarelo);
+    font-weight: 700;
+}
+
+/* ESTILO PARA O BOTÃO 'VER ENDEREÇO COMPLETO' */
+
+.btn-location {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: var(--cor-destaque-amarelo);
+    color: var(--cor-texto-escuro);
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+.btn-location:hover {
+    background-color: #ffd75f;
+}
+
+
+
 .opening-hours-section h2 {
     font-size: 2rem;
     color: var(--cor-acento-vermelho);
@@ -229,6 +334,54 @@ background-color: var(--cor-fundo-primaria);
     object-fit: cover;
     display: block;
 }
+
+.location-section {
+    padding: 80px 20px;
+    background-color: var(--cor-fundo-primaria);
+    color: var(--cor-texto-claro);
+    text-align: center;
+}
+
+.location-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--cor-fundo-secundaria);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+
+    /* NOVO: Adiciona uma borda sutil ao container do conteúdo */
+    border: 1px solid rgba(0, 255, 255, 0.15);
+}
+
+/* --- ESTILOS PARA A IMAGEM (COM MOLDURA PROFISSIONAL) --- */
+
+.location-image {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 12px;
+
+    /* NOVO: A moldura e o efeito luminoso */
+    border: 3px solid var(--cor-destaque-amarelo);
+    box-shadow: 0 015px rgba(255, 199, 44, 0.6),
+    0 0 30px rgba(0, 255, 255, 0.3),
+    0 8px 20px rgba(0, 0, 0, 0.7);
+    
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+.location-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 199, 44, 0.8),
+    0 0 40px rgba(0, 255, 255, 0.5),
+    0 12px 25px rgba(0, 0, 0, 0.8);
+}
+
 
 
 
