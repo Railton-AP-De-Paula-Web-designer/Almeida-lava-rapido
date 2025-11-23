@@ -547,6 +547,104 @@ footer {
     animation: fadeIn 0.25s ease-out;
 }
 
+.video-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.video-overlay.show {
+    display: flex !important;
+    animation: fadeIn 0.25 ease-out
+}
+
+.video-box {
+    background: #111;
+    padding: 15px;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    animation: scaleIn 0.25 ease-out;
+}
+video {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+}
+
+/*Animações*/
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.85); opacity: 0;}
+    to { transform: scale(1); opacity: 1;}
+}
+
+/* --- TITULOS MODERNOS E CENTRALIZADOS --- */
+h1, h2, h3 {
+    font-family: "poppins", arial, sans-serif;
+    font-weight: 600;
+    text-align: center;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+/* h1 - titulo principal */
+
+h1 { font-size: 2.4rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #00c3ff;
+    text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+
+}
+h2 {
+    font-size: 1.9rem;
+    margin: 40px 0 15px 0;
+    color: #00aaff;
+    text-shadow: 0 0 6px rgba(0, 170, 255, 0.4);
+}
+h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #66d1ff;
+}
+
+/* BOTÃO DE ABRIR VÍDEO */
+
+.open-video-btn {
+    padding: 12px 25px;
+    background: linear-gradient(45deg, #007bff, #00c3ff);
+    color: #fff;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    margin-top: 10px;
+}
+
+.open-video-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 195, 255, 0.5);
+}
+
+
+
+
 
 
 
