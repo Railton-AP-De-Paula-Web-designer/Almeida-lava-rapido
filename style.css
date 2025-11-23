@@ -1,26 +1,32 @@
-
-
-:root{--cor-fundo-primaria: #0F1E2E; /* Azul Marinho Escuro (Profissional/Confiança) */
+:root{
+    --cor-fundo-primaria: #0F1E2E; /* Azul Marinho Escuro (Profissional/Confiança) */
     --cor-fundo-secundaria: #1F3851; /* Azul Escuro um pouco mais claro para contraste nos cards */
     --cor-destaque-amarelo: #FFC72C; /* Amarelo Dourado (Brilho/Ação) */
     --cor-acento-vermelho: #D81E5B; /* Vermelho Profundo (Acento/Alerta) */
     --cor-texto-claro: #FFFFFF; /* Branco Puro */
     --cor-texto-escuro: #1A1A1A; /* Quase Preto */
-
 }
 
-
-*{
+/* --- ESTILOS BASE --- */
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body{
-    background-color: antiquewhite;
-    color: var(--cor-texto-escuro);
+body {
+    background-color: var(--cor-fundo-primaria); /* Corrigido para uma cor escura padrão do tema */
+    color: var(--cor-texto-claro); /* Texto padrão claro para fundo escuro */
+    font-family: sans-serif; /* Adicionado para consistência */
 }
 
+h2 {
+    color: var(--cor-destaque-amarelo);
+}
+
+/* Removido o estilo de 'localization-section' que parecia um erro de digitação */
+
+/* --- CABEÇALHO E NAVEGAÇÃO --- */
 .cabecalho nav {
     position: fixed;
     top: 0;
@@ -28,51 +34,46 @@ body{
     width: 100%;
     z-index: 1000;
     backdrop-filter: blur(5px);
-      background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), rgba(0, 255, 255, 0.1), rgba(0, 0, 0, 0.3));
-      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), rgba(0, 255, 255, 0.1), rgba(0, 0, 0, 0.3));
+    border-bottom: 1px solid rgba(0, 255, 255, 0.3);
 }
+
 .cabecalho nav ul {
     text-align: center;
     list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
-
-
 }
 
 .cabecalho nav ul li {
     display: flex;
     align-items: center;
-    gap: 5px;
-    margin: 0 10px;
     cursor: pointer;
 }
+
 .cabecalho nav ul li a {
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 5px;
     color: var(--cor-texto-claro);
-    font-weight: 500;;
+    font-weight: 500;
     font-size: 1rem;
     transition: color 0.3s ease;
 }
+
 .cabecalho nav ul li a:hover {
     color: var(--cor-destaque-amarelo);
 }
+
 .logo-nav {
     width: 20px;
     height: 20px;
-    margin-right: 5px;
-    transform: scaleX(3px);
 }
 
-
+/* --- SEÇÃO HERO --- */
 .hero-section {
     display: flex;
     flex-direction: column;
@@ -89,6 +90,7 @@ body{
     margin: 0 auto;
     overflow: hidden;
 }
+
 .hero-main-image {
     width: 100%;
     height: auto;
@@ -96,36 +98,34 @@ body{
     opacity: 0.7;
 }
 
-
-
 .hero-content {
     padding: 20px 20px 40px;
-    margin-top:  -30px;
+    margin-top: -30px;
     max-width: 800px;
     z-index: 10;
-    color: #333;
+    color: var(--cor-texto-claro); /* Corrigido */
 }
 
 .hero-content h1 {
     font-size: 3.5rem;
     margin-bottom: 15px;
     color: var(--cor-destaque-amarelo);
-
-
     text-shadow: 1px 1px 0 var(--cor-fundo-primaria),
-    2px 2px 0 var(--cor-fundo-primaria),
-    3px 3px 0 var(--cor-fundo-primaria),
-    4px 4px 2px rgba(0, 0, 0, 0.7),
-    5px 5px 5px rgba(0, 0, 0, 0.5),
-    0 0 10px rgba(255, 255, 255, 0.2);
+        2px 2px 0 var(--cor-fundo-primaria),
+        3px 3px 0 var(--cor-fundo-primaria),
+        4px 4px 2px rgba(0, 0, 0, 0.7),
+        5px 5px 5px rgba(0, 0, 0, 0.5),
+        0 0 10px rgba(255, 255, 255, 0.2);
 }
+
 .hero-content p {
     font-size: 1.25rem;
     margin-bottom: 30px;
-    color:  var(--cor-texto-claro);
+    color: var(--cor-texto-claro);
     font-weight: 300;
 }
 
+/* --- SEÇÃO DE SERVIÇOS --- */
 .services-section {
     padding: 60px 20px;
     background-color: var(--cor-fundo-secundaria);
@@ -138,36 +138,45 @@ body{
     color: var(--cor-destaque-amarelo);
     margin-bottom: 40px;
 }
+
 .services-grid {
     display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
-
 }
 
 .service-card {
-background-color: var(--cor-fundo-primaria);
+    background-color: var(--cor-fundo-primaria);
     padding: 30px;
     border-radius: 10px;
-    border-left: 5px solid var(--cor-acento-vermelho); /* Destaque lateral em Vermelho */
+    border-left: 5px solid var(--cor-acento-vermelho);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .service-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
     border-left-color: var(--cor-destaque-amarelo);
-
 }
 
 .service-icon {
     font-size: 3rem;
     margin-bottom: 15px;
     color: var(--cor-destaque-amarelo);
-   
 }
+
+.service-icon img, .logo-premium { /* Unificado o estilo das imagens de serviço */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    max-width: 180px; /* Mantido o valor da logo-premium */
+    margin: 0 auto;
+}
+
 .service-card h3 {
     font-size: 1.5rem;
     color: var(--cor-texto-claro);
@@ -177,25 +186,24 @@ background-color: var(--cor-fundo-primaria);
 
 .service-card p {
     font-size: 1rem;
-    color: rgba(255, 255, 225, 0.8);
-
+    color: rgba(255, 255, 255, 0.8);
 }
 
+/* --- SEÇÃO DE HORÁRIOS E LOCALIZAÇÃO (Widget) --- */
 .opening-hours-section {
     padding: 60px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    box-shadow: 0 0 0 2px var(--cor-fundo-secundaria),
-    0 0 0 4px rgba(0, 255, 255, 0.3),
-    0 0 20px rgba(0, 255, 255, 0.1);
-    border-radius: 12px;
-    overflow: hidden;
-   
+    /* Estilos de borda e sombra removidos do section para manter a limpeza */
 }
 
-/* O CONTAINER PRINCIPAL DO WIDGET */
+.opening-hours-section h2 {
+    font-size: 2rem;
+    color: var(--cor-acento-vermelho);
+    margin-bottom: 20px;
+}
 
 .hours-content {
     width: 100%;
@@ -206,11 +214,9 @@ background-color: var(--cor-fundo-primaria);
     border-radius: 10px;
     border: 1px solid rgba(0, 255, 255, 0.2);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(255, 255, 255, 0.1);
-
 }
-.status-indicator {
-    /* Estilos de Aparência Digital e Tamanho */
 
+.status-indicator {
     font-size: 2.8rem;
     font-weight: 700;
     letter-spacing: 3px;
@@ -218,35 +224,25 @@ background-color: var(--cor-fundo-primaria);
     padding: 15px 20px;
     margin-bottom: 25px;
     border-radius: 8px;
-
-    /* Configuração padrão (FECHADO) - Fundo Escuro com Brilho Vermelho */
     background-color: #1a0000;
     color: var(--cor-acento-vermelho);
     border: 2px solid var(--cor-acento-vermelho);
-
-    /* Efeito de Brilho Neon Fiel à Imagem */
-
-    box-shadow: 0 015px var(--cor-acento-vermelho),
-    0 0 25px var(--cor-acento-vermelho),
-    0 0 40px rgba(216, 30, 91, 0.4);
+    box-shadow: 0 0 15px var(--cor-acento-vermelho),
+        0 0 25px var(--cor-acento-vermelho),
+        0 0 40px rgba(216, 30, 91, 0.4);
     text-shadow: 0 0 8px rgba(216, 30, 91, 0.8),
-    0 0 15px rgba(216, 30, 91, 0.5);
-
+        0 0 15px rgba(216, 30, 91, 0.5);
 }
-
-/* ESTILO ABERTO (ATIVADO FUTURAMENTE VIA JAVASCRIPT) */
 
 .status-widget.is-open .status-indicator {
     background-color: #1a1a00;
     color: var(--cor-destaque-amarelo);
     box-shadow: 0 0 15px var(--cor-destaque-amarelo),
-                0 0 25px var(--cor-destaque-amarelo),
-                0 0 40px rgba(255, 199, 44, 0.4);
-                text-shadow: 0 0 8px rgba(255, 199, 44, 0.8),
-                0 0 15px rgba(255, 199, 44, 0.5);
+        0 0 25px var(--cor-destaque-amarelo),
+        0 0 40px rgba(255, 199, 44, 0.4);
+    text-shadow: 0 0 8px rgba(255, 199, 44, 0.8),
+        0 0 15px rgba(255, 199, 44, 0.5);
 }
-
-/* DETALHES DO HORÁRIO E LINHAS PONTILHADAS */
 
 .schedule-details p {
     display: flex;
@@ -272,8 +268,6 @@ background-color: var(--cor-fundo-primaria);
     font-weight: 700;
 }
 
-/* ESTILO PARA O BOTÃO 'VER ENDEREÇO COMPLETO' */
-
 .btn-location {
     display: block;
     width: 100%;
@@ -285,26 +279,14 @@ background-color: var(--cor-fundo-primaria);
     border-radius: 5px;
     transition: background-color 0.3s ease;
     text-align: center;
+    text-decoration: none; /* Adicionado para links */
 }
+
 .btn-location:hover {
     background-color: #ffd75f;
 }
 
-
-
-.opening-hours-section h2 {
-    font-size: 2rem;
-    color: var(--cor-acento-vermelho);
-    margin-bottom: 20px;
-}
-
-.localization-section {
-    padding: 0 20px 60px 20px;
-    background-color: var(--cor-fundo-primaria);
-    color: var(--cor-texto-claro);
-    text-align: center;
-}
-
+/* --- WHATSAPP INFO --- */
 #whatsapp-info {
     position: absolute;
     top: 77px;
@@ -318,23 +300,14 @@ background-color: var(--cor-fundo-primaria);
     font-weight: bold;
     letter-spacing: 0.5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease ;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 #whatsapp-info:hover {
     background-color: #ffd75f;
 }
 
-.logo-premium {
-    width: 180px;
-}
-
-.service-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
+/* --- SEÇÃO DE LOCALIZAÇÃO (FACHADA) --- */
 .location-section {
     padding: 80px 20px;
     background-color: var(--cor-fundo-primaria);
@@ -353,33 +326,27 @@ background-color: var(--cor-fundo-primaria);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-
-    /* NOVO: Adiciona uma borda sutil ao container do conteúdo */
     border: 1px solid rgba(0, 255, 255, 0.15);
 }
-
-/* --- ESTILOS PARA A IMAGEM (COM MOLDURA PROFISSIONAL) --- */
 
 .location-image {
     width: 100%;
     max-width: 600px;
     height: auto;
     border-radius: 12px;
-
-    /* NOVO: A moldura e o efeito luminoso */
     border: 3px solid var(--cor-destaque-amarelo);
-    box-shadow: 0 015px rgba(255, 199, 44, 0.6),
-    0 0 30px rgba(0, 255, 255, 0.3),
-    0 8px 20px rgba(0, 0, 0, 0.7);
-    
+    box-shadow: 0 0 15px rgba(255, 199, 44, 0.6),
+        0 0 30px rgba(0, 255, 255, 0.3),
+        0 8px 20px rgba(0, 0, 0, 0.7);
     object-fit: cover;
     transition: all 0.3s ease;
 }
+
 .location-image:hover {
     transform: scale(1.02);
     box-shadow: 0 0 20px rgba(255, 199, 44, 0.8),
-    0 0 40px rgba(0, 255, 255, 0.5),
-    0 12px 25px rgba(0, 0, 0, 0.8);
+        0 0 40px rgba(0, 255, 255, 0.5),
+        0 12px 25px rgba(0, 0, 0, 0.8);
 }
 
 .location-section h2 {
@@ -389,59 +356,43 @@ background-color: var(--cor-fundo-primaria);
     letter-spacing: 3px;
     text-transform: uppercase;
     position: relative;
-    transition: transform 0.2 ease-out;
-
-    /* CAMADAS 3D/4D EMPILHADAS */
-    
-    /* Camada 1: Sombra escura e grossa (Efeito de Profundidade) */
-
+    transition: transform 0.2s ease-out; /* Corrigido de 'ease-out' para 'ease-out' */
     text-shadow: 3px 3px 0 var(--cor-fundo-primaria),
-
-    /* Camada 2: Brilho/Acento Amarelo (Foco) */
-
-    0 0 10px rgba(255, 199, 44, 0.8);
-
+        0 0 10px rgba(255, 199, 44, 0.8);
 }
 
 .location-section h2:hover {
-    /* EFEITO DE MOVIMENTO 4D NO HOVER */
-    /* Faz o título "saltar" ligeiramente para fora e para a esquerda/topo */
     transform: translate(-3px, -3px);
-
-    /* Intensifica a sombra para dar mais profundidade */
-
-    text-shadow: 
-    /*mantem o contraste da profundidade*/
-    6px 6px 0 var(--cor-fundo-secundaria),
-    /*camada de brilho mais intença*/
-    0 0 15px var(--cor-destaque-amarelo),
-    0 0 30px rgba(255, 199, 44, 0.6);
-
-}
-.nossos-client {
-    width: 250px;
+    text-shadow:
+        6px 6px 0 var(--cor-fundo-secundaria),
+        0 0 15px var(--cor-destaque-amarelo),
+        0 0 30px rgba(255, 199, 44, 0.6);
 }
 
+/* --- SEÇÃO CLIENTES (FOTOS E VÍDEO) --- */
 .satisfied-clients {
     padding: 80px 20px;
     background-color: var(--cor-fundo-secundaria);
     color: var(--cor-texto-claro);
     text-align: center;
 }
+
 .satisfied-clients h2 {
     font-size: 2.5rem;
     color: var(--cor-destaque-amarelo);
     margin-bottom: 50px;
     text-shadow: 0 0 5px rgba(255, 199, 44, 0.4);
 }
-.satisfied-clients-grid {
+
+.satisfied-client-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 25px;
     max-width: 1200px;
     margin: 0 auto 50px auto;
 }
-.client-photo-card {
+
+.client-photo-card, .client-gallery-item { /* Otimizado: .client-gallery-item também é um card */
     position: relative;
     overflow: hidden;
     border-radius: 10px;
@@ -450,10 +401,10 @@ background-color: var(--cor-fundo-primaria);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.client-photo-card img {
+.client-photo-card img, .nossos-client { /* Inclui a classe nossos-client no card */
     width: 100%;
-    height: 250px; /* Altura fixa para manter o grid uniforme */
-    object-fit: cover; /* Recorta a imagem para preencher o espaço sem distorcer */
+    height: 250px;
+    object-fit: cover;
     display: block;
     transition: opacity 0.3s ease;
 }
@@ -471,28 +422,131 @@ background-color: var(--cor-fundo-primaria);
     transform: translateY(100%);
     transition: transform 0.3s ease;
 }
+
 .client-photo-card:hover .photo-overlay {
     transform: translateY(0);
-
 }
 
-.btn-view-gallery {
-    display: inline-block;
-    padding: 12px 30px;
+/* --- ESTILOS DO VÍDEO (PONTO DE CORREÇÃO CRÍTICA) --- */
+
+.video-presentation {
+    /* Garante que esta seção não seja escondida por outros estilos */
+    padding: 0; 
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    /* Altura definida que garante a exibição do elemento */
+    height: 250px; 
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.video-container video {
+    /* GARANTE O PREENCHIMENTO E VISIBILIDADE DO VÍDEO */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+/* O container dos botões que fica SOBRE o vídeo */
+.video-controls-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px;
+    
+    /* CORREÇÃO DO BUG: Sintaxe correta para o gradiente de transparência */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)); 
+    opacity: 0; 
+    transition: opacity 0.3s ease;
+}
+
+/* Faz os controles aparecerem ao passar o mouse */
+.video-container:hover .video-controls-overlay {
+    opacity: 1;
+}
+
+/* Estilo Base para todos os Botões de Controle */
+.control-btn {
+    background: var(--cor-fundo-secundaria);
+    color: var(--cor-destaque-amarelo);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.control-btn:hover {
+    background-color: var(--cor-destaque-amarelo);
+    color: var(--cor-fundo-primaria);
+    transform: scale(1.1);
+}
+
+/* Estilo Específico para o Botão Fechar */
+.close-btn {
     background-color: var(--cor-acento-vermelho);
     color: var(--cor-texto-claro);
-    text-decoration: none;
-    font-weight: 700;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-.btn-view-gallery:hover {
+.close-btn:hover {
     background-color: #e0447d;
-
+    transform: scale(1.1);
+    color: var(--cor-texto-claro);
 }
+
+/* --- RODAPÉ --- */
+footer {
+    padding: 20px;
+    background-color: var(--cor-fundo-primaria);
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    border-top: 1px solid rgba(0, 255, 255, 0.1);
+    font-size: 0.9rem;
+}
+
+.video-modal {
+    display: none;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+.video-modal.show {
+    display: block;
+    opacity: 1;
+}
+
+.video-controls button {
+    padding: 10px 15px;
+    border: none;
+    background: #FFC72C;
+    color: #000;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* mostra o overlay quando a classe .show for adicionada pelo JS */
+.video-overlay.show {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.25s ease-out;
+}
+
 
 
 
