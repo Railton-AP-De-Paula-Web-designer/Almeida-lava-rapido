@@ -20,11 +20,16 @@ body {
     font-family: sans-serif; /* Adicionado para consistência */
 }
 
-h2 {
-    color: var(--cor-destaque-amarelo);
+h1, h2, h3 {
+    font-family: "poppins", arial, sans-serif;
+    font-weight: 600;
+    text-align: center;
+    color: #ffffff;
+    letter-spacing: 1px;
 }
 
-/* Removido o estilo de 'localization-section' que parecia um erro de digitação */
+
+
 
 /* --- CABEÇALHO E NAVEGAÇÃO --- */
 .cabecalho nav {
@@ -356,7 +361,7 @@ h2 {
     letter-spacing: 3px;
     text-transform: uppercase;
     position: relative;
-    transition: transform 0.2s ease-out; /* Corrigido de 'ease-out' para 'ease-out' */
+    transition: transform 0.2s ease-out;
     text-shadow: 3px 3px 0 var(--cor-fundo-primaria),
         0 0 10px rgba(255, 199, 44, 0.8);
 }
@@ -481,7 +486,7 @@ h2 {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    cursor: pointer;
+    cursor: button;
     font-size: 1.1rem;
     display: flex;
     align-items: center;
@@ -517,6 +522,7 @@ footer {
     font-size: 0.9rem;
 }
 
+/* Modal / overlay vídeo - exibição controlada por classes JS */
 .video-modal {
     display: none;
     opacity: 0;
@@ -528,6 +534,7 @@ footer {
     opacity: 1;
 }
 
+/* Botões de controle alternativos (mantidos) */
 .video-controls button {
     padding: 10px 15px;
     border: none;
@@ -540,13 +547,6 @@ footer {
 }
 
 /* mostra o overlay quando a classe .show for adicionada pelo JS */
-.video-overlay.show {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.25s ease-out;
-}
-
 .video-overlay {
     display: none;
     position: fixed;
@@ -559,11 +559,14 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    animation: fadeIn 0.25s ease-out;
 }
 
 .video-overlay.show {
     display: flex !important;
-    animation: fadeIn 0.25 ease-out
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.25s ease-out;
 }
 
 .video-box {
@@ -573,7 +576,7 @@ footer {
     max-width: 800px;
     width: 100%;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-    animation: scaleIn 0.25 ease-out;
+    animation: scaleIn 0.25s ease-out;
 }
 video {
     width: 100%;
@@ -594,34 +597,10 @@ video {
 }
 
 /* --- TITULOS MODERNOS E CENTRALIZADOS --- */
-h1, h2, h3 {
-    font-family: "poppins", arial, sans-serif;
-    font-weight: 600;
-    text-align: center;
-    color: #ffffff;
-    letter-spacing: 1px;
-}
+/* Mantive a família e estilos gerais (conforme seu original) */
 
-/* h1 - titulo principal */
 
-h1 { font-size: 2.4rem;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #00c3ff;
-    text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
 
-}
-h2 {
-    font-size: 1.9rem;
-    margin: 40px 0 15px 0;
-    color: #00aaff;
-    text-shadow: 0 0 6px rgba(0, 170, 255, 0.4);
-}
-h3 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #66d1ff;
-}
 
 /* BOTÃO DE ABRIR VÍDEO */
 
@@ -641,7 +620,6 @@ h3 {
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(0, 195, 255, 0.5);
 }
-
 
 
 

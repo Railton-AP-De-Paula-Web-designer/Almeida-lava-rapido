@@ -1,106 +1,178 @@
-// script.js - compatível com seu HTML atual
+// script.js — versão final, organizada e refatorada por sênior JS
 document.addEventListener("DOMContentLoaded", () => {
-  const openBtn = document.getElementById("openVideoBtn");
-  const container = document.getElementById("videoContainer");
-  const closeBtn = document.getElementById("closeVideoBtn");
-  const video = document.getElementById("myVideo");
-  const playPauseBtn = document.getElementById("playPauseBtn");
-  const volumeControl = document.getElementById("volumeControl");
 
-  // Safety: se algum elemento não existir, não quebra o script
-  if (!openBtn || !container || !closeBtn || !video || !playPauseBtn || !volumeControl) {
-    console.warn("script.js: elementos de vídeo não encontrados. Verifique os IDs no HTML.");
-    return;
-  }
+    // ========================================================
+    // 🟡 1. ELEMENTOS HTML (SEMPRE DECLARADOS PRIMEIRO)
+    // ========================================================
 
-  // Função para mostrar overlay (usa classe 'show' para manter CSS separado)
-  function showOverlay() {
-    container.classList.add("show");
-    // tenta reproduzir (clic do usuário autoriza reprodução)
-    const playPromise = video.play();
-    if (playPromise && typeof playPromise.then === "function") {
-      playPromise.catch(() => {
-        // autoplay bloqueado — mantém sem erro
-      });
+    // Widget de horário
+    const statusWidget = document.getElementById("openingStatusWidget");
+    const statusIndicator = document.getElementById("statusIndicator");
+
+    // Elementos do sistema de vídeo
+    const openBtn = document.getElementById("openVideoBtn");
+    const container = document.getElementById("videoContainer");
+    const closeBtn = document.getElementById("closeVideoBtn");
+    const video = document.getElementById("myVideo");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const volumeControl = document.getElementById("volumeControl");
+
+    // Verificação de segurança: garante que TODOS os elementos do vídeo existem
+    const videoElementsPresent = [
+        openBtn, container, closeBtn, video, playPauseBtn, volumeControl
+    ].every(Boolean);
+
+    if (!videoElementsPresent) {
+        console.warn("script.js: alguns elementos do vídeo não foram encontrados. Verifique os IDs.");
+        // ⚠️ Não usamos 'return' para não quebrar o sistema de horário
     }
-    updatePlayButton();
-  }
 
-  // Função para esconder overlay e resetar vídeo
-  function hideOverlay() {
-    video.pause();
-    video.currentTime = 0;
-    container.classList.remove("show");
-    updatePlayButton();
-  }
 
-  // Atualiza texto do botão de play/pause conforme estado
-  function updatePlayButton() {
-    if (video.paused) {
-      playPauseBtn.textContent = "▶️ Reproduzir";
-    } else {
-      playPauseBtn.textContent = "⏸ Pausar";
+    // ========================================================
+    // 🎬 2. FUNÇÕES DO VÍDEO
+    // ========================================================
+
+    function showOverlay() {
+        container.classList.add("show");
+        playVideo();
+        updatePlayButton();
     }
-  }
 
-  // Abrir ao clicar
-  openBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    showOverlay();
-  });
-
-  // Fechar ao clicar no ×
-  closeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    hideOverlay();
-  });
-
-  // Fechar ao clicar fora da video-box (clic no overlay)
-  container.addEventListener("click", (e) => {
-    // se clicou no próprio overlay (e não dentro da caixa do vídeo), fecha
-    if (e.target === container) hideOverlay();
-  });
-
-  // Fechar com Escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && container.classList.contains("show")) {
-      hideOverlay();
+    function hideOverlay() {
+        resetVideo();
+        container.classList.remove("show");
+        updatePlayButton();
     }
-  });
 
-  // Play / Pause
-  playPauseBtn.addEventListener("click", () => {
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
+    function playVideo() {
+        const attempt = video.play();
+        attempt?.catch(() => {}); // Evita erro de autoplay
     }
-    updatePlayButton();
-  });
 
-  // Atualiza icone/texto quando o usuário usa controles nativos (por exemplo na mobile)
-  video.addEventListener("play", updatePlayButton);
-  video.addEventListener("pause", updatePlayButton);
+    function resetVideo() {
+        video.pause();
+        video.currentTime = 0;
+    }
 
-  // Volume control (range 0 -> 1)
-  // garante valor inicial coerente
-  if (!volumeControl.value) volumeControl.value = "1";
-  video.volume = parseFloat(volumeControl.value);
+    function updatePlayButton() {
+        playPauseBtn.textContent = video.paused ? "▶️ Reproduzir" : "⏸ Pausar";
+    }
 
-  volumeControl.addEventListener("input", () => {
-    const v = parseFloat(volumeControl.value);
-    // se 0, definimos muted = true; caso contrário muted = false
-    video.muted = v === 0;
-    video.volume = v;
-  });
+    function updateVolume() {
+        const v = parseFloat(volumeControl.value || "1");
+        video.muted = v === 0;
+        video.volume = v;
+    }
 
-  // Se o vídeo terminar, atualiza o botão
-  video.addEventListener("ended", () => {
-    updatePlayButton();
-  });
 
-  // Proteção: se o container é exibido no carregamento, atualiza estado
-  if (container.classList.contains("show")) {
-    updatePlayButton();
-  }
+    // ========================================================
+    // 🖱️ 3. EVENTOS DO VÍDEO
+    // ========================================================
+
+    if (videoElementsPresent) {
+
+        openBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            showOverlay();
+        });
+
+        closeBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            hideOverlay();
+        });
+
+        // Clique fora da caixa fecha o modal
+        container.addEventListener("click", (e) => {
+            if (e.target === container) hideOverlay();
+        });
+
+        // Pressionar ESC fecha o modal
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && container.classList.contains("show")) {
+                hideOverlay();
+            }
+        });
+
+        // Play / Pause no botão
+        playPauseBtn.addEventListener("click", () => {
+            video.paused ? playVideo() : video.pause();
+            updatePlayButton();
+        });
+
+        // Eventos nativos do vídeo
+        video.addEventListener("play", updatePlayButton);
+        video.addEventListener("pause", updatePlayButton);
+        video.addEventListener("ended", updatePlayButton);
+
+        // Volume
+        updateVolume();
+        volumeControl.addEventListener("input", updateVolume);
+
+        // Caso o modal abra já visível
+        if (container.classList.contains("show")) {
+            updatePlayButton();
+        }
+    }
+
+
+    // ========================================================
+    // ⏰ 4. SISTEMA AUTOMÁTICO DE HORÁRIO DE FUNCIONAMENTO
+    // ========================================================
+
+    const schedule = [
+        { day: 1, open: 900, close: 1800 }, // Segunda
+        { day: 2, open: 900, close: 1800 }, // Terça
+        { day: 3, open: 900, close: 1800 }, // Quarta
+        { day: 4, open: 900, close: 1800 }, // Quinta
+        { day: 5, open: 900, close: 1800 }, // Sexta
+        { day: 6, open: 900, close: 1300 }  // Sábado
+    ];
+
+    if (statusWidget && statusIndicator) {
+
+        function formatTime(timeInt) {
+            const hours = Math.floor(timeInt / 100);
+            const minutes = timeInt % 100;
+            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+        }
+
+        function checkOpeningStatus() {
+            const now = new Date();
+            const currentDay = now.getDay();
+            const currentTime = now.getHours() * 100 + now.getMinutes();
+
+            const today = schedule.find(s => s.day === currentDay);
+
+            let isOpen = false;
+            let statusText = "FECHADO";
+
+            if (today) {
+                const { open, close } = today;
+
+                if (currentTime >= open && currentTime < close) {
+                    isOpen = true;
+                    statusText = "ABERTO AGORA";
+
+                } else if (currentTime < open) {
+                    statusText = `FECHADO (Abre às ${formatTime(open)})`;
+
+                } else {
+                    statusText = `FECHADO (Fechou às ${formatTime(close)})`;
+                }
+
+            } else {
+                statusText = "FECHADO (Fim de Semana)";
+            }
+
+            statusIndicator.textContent = statusText;
+            statusWidget.classList.toggle("is-open", isOpen);
+        }
+
+        // Executa ao carregar
+        checkOpeningStatus();
+
+        // Atualiza a cada minuto
+        setInterval(checkOpeningStatus, 60000);
+    }
+
 });
