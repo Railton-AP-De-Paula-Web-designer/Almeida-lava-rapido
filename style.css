@@ -436,7 +436,13 @@ h1, h2, h3 {
 
 .video-presentation {
     /* Garante que esta seção não seja escondida por outros estilos */
-    padding: 0; 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 30px 0;
+
+
 }
 
 .video-container {
@@ -512,15 +518,7 @@ h1, h2, h3 {
     color: var(--cor-texto-claro);
 }
 
-/* --- RODAPÉ --- */
-footer {
-    padding: 20px;
-    background-color: var(--cor-fundo-primaria);
-    color: rgba(255, 255, 255, 0.6);
-    text-align: center;
-    border-top: 1px solid rgba(0, 255, 255, 0.1);
-    font-size: 0.9rem;
-}
+
 
 /* Modal / overlay vídeo - exibição controlada por classes JS */
 .video-modal {
@@ -577,6 +575,9 @@ footer {
     width: 100%;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
     animation: scaleIn 0.25s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 video {
     width: 100%;
@@ -605,21 +606,240 @@ video {
 /* BOTÃO DE ABRIR VÍDEO */
 
 .open-video-btn {
-    padding: 12px 25px;
+    padding: 10px 20px;
     background: linear-gradient(45deg, #007bff, #00c3ff);
-    color: #fff;
-    font-size: 1.1rem;
+    color: #000;
+    font-size: 1em;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: 0.25s ease;
-    margin-top: 10px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-inout;
 }
 
 .open-video-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(0, 195, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background-color: #00a3d9;
+    font-weight: 700;
 }
+.video-presentation h2 {
+    color: #00cfff;
+    text-align: center;
+    text-shadow: 1 px 1px 3px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+}
+.botao-zap {
+   position: fixed;
+   bottom: 30px;
+   right: 30px;
+   z-index: 10000;
+   margin: 0;
+   width: auto;
+   text-align: initial;
+}
+.botao-zap a {
+   text-decoration: none;
+   display: block;
+}
+
+.botao-zap button {
+   padding: 15px 35px;
+   font-family: 'montserrat', sans-serif;
+   font-weight: 700;
+   font-size: 1.15rem;
+   text-transform: uppercase;
+   letter-spacing: 1px;
+
+   /*cores fundo*/
+   color: #ffffff;
+   background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+   border: none;
+   border-radius: 50px;
+   cursor: pointer;
+   box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4), 0 3px 6px rgba(0, 0, 0, 0.1);
+   display: inline-flex;
+   align-items: center;
+   gap: 12px;
+   transition: all 0.4s ease-in-out;
+}
+.botao-zap button i {
+   font-size: 1.25rem;
+   color: #ffffff;
+   background-color:transparent;
+}
+.botao-zap button:hover {
+   background: linear-gradient(135deg, #128c7e 0%, #075e54 100%);
+   transform: translateY(-3px) scale(1.02);
+   box-shadow: 0 15px 30px rgba(18, 140, 126, 0.6), 0 5px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.botao-zap button:active {
+   transform: translateY(0);
+   box-shadow: 0 5px 10px rgba(37, 211, 102, 0.2);
+}
+
+@keyframes pulse {
+   0% {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+   }
+   70% {
+      box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+
+
+   }
+   100% {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+   }
+}
+
+.botao-zap button {
+    animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+    /* Mantém os outros estilos que já estavam aqui */
+    padding: 15px 35px;
+    /* ... (restante do estilo) */
+    transition: all 0.4 ease-in-out;
+}
+
+.footer-section {
+    width: 100%;
+    padding: 40px 20px;
+    background-color: #000;
+    color: #ffffff;
+    text-align: center;
+    border-top: 1px solid rgba(0, 255, 255, 0.1);
+    box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.2);
+    margin-top: 80px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-brand, .footer-social-links,
+.footer-legal-links {
+    flex-basis: 30%;
+    text-align: left;
+}
+.footer-social-links a {
+    color: #00ffff;
+    font-size: 2.5em;
+    margin: 0 15px;
+    transition: color
+    0.3s ease;
+}
+.footer-legal-links {
+    text-align: right;
+}
+.footer-brand h3 {
+    font-size: 2.5em;
+    letter-spacing: 2px;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    margin: 0 0 15px 0;
+}
+.footer-brand p {
+    font-size: 1em;
+    color: #b3b3b3;
+    margin: 0;
+}
+.footer-social-links img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3 ease;
+}
+.footer-social-links img:hover {
+    transition: scale(1.2);
+}
+.brazil-flag-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+.brazil-flag-img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+#bandeira-footer {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transform: translateX(5px);
+    margin-right: 5px;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.6);
+}
+
+.brazil-flag-container p {
+    font-size: 0.8em;
+    color: #b3b3b3;
+    margin: 0;
+
+}
+
+.footer-legal-links a {
+    text-decoration: none;
+    margin: 0 15px;
+    transition: color 0,3s;
+}
+
+.footer-legal-links a:hover {
+    color: #00ffff;
+    text-decoration: underline;
+}
+
+.footer-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    max-width: 0 auto;
+    border-top: 1px solid rgba(255, 255, 255,0.1);
+    padding-top: 20px ;
+
+}
+.developer-info {
+    text-align: left;
+    color: #ffffff;
+}
+
+.developer-info h5 {
+    font-size: 1.1em;
+    color: #00ffff;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    margin: 0;
+}
+
+.developer-info h6 {
+    font-size: 0.9em;
+    color: #b3b3b3;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+    margin: 0;
+}
+#horario-footer{
+    letter-spacing: 2px;
+}
+.footer-copyright {
+    font-size: 0.9em;
+    color: #b3b3b3;
+    text-align: right;
+    margin: 0;
+}
+
+
+
 
 
 
