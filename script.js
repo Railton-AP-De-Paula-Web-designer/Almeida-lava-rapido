@@ -1,15 +1,16 @@
-// script.js — versão final, organizada e refatorada por sênior JS
+// ========================================================
+// script.js — Versão Final Sênior + Correção Horário
+// ========================================================
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // ========================================================
-    // 🟡 1. ELEMENTOS HTML (SEMPRE DECLARADOS PRIMEIRO)
+    // 🟡 1. ELEMENTOS HTML
     // ========================================================
 
-    // Widget de horário
     const statusWidget = document.getElementById("openingStatusWidget");
     const statusIndicator = document.getElementById("statusIndicator");
 
-    // Elementos do sistema de vídeo
     const openBtn = document.getElementById("openVideoBtn");
     const container = document.getElementById("videoContainer");
     const closeBtn = document.getElementById("closeVideoBtn");
@@ -17,59 +18,65 @@ document.addEventListener("DOMContentLoaded", () => {
     const playPauseBtn = document.getElementById("playPauseBtn");
     const volumeControl = document.getElementById("volumeControl");
 
-    // Verificação de segurança: garante que TODOS os elementos do vídeo existem
     const videoElementsPresent = [
         openBtn, container, closeBtn, video, playPauseBtn, volumeControl
     ].every(Boolean);
 
     if (!videoElementsPresent) {
-        console.warn("script.js: alguns elementos do vídeo não foram encontrados. Verifique os IDs.");
-        // ⚠️ Não usamos 'return' para não quebrar o sistema de horário
+        console.warn("script.js: Elementos do vídeo ausentes. Sistema de vídeo desativado.");
     }
-
 
     // ========================================================
     // 🎬 2. FUNÇÕES DO VÍDEO
     // ========================================================
 
-    function showOverlay() {
-        container.classList.add("show");
-        playVideo();
-        updatePlayButton();
-    }
-
-    function hideOverlay() {
-        resetVideo();
-        container.classList.remove("show");
-        updatePlayButton();
-    }
-
-    function playVideo() {
-        const attempt = video.play();
-        attempt?.catch(() => {}); // Evita erro de autoplay
-    }
-
-    function resetVideo() {
-        video.pause();
-        video.currentTime = 0;
-    }
-
-    function updatePlayButton() {
-        playPauseBtn.textContent = video.paused ? "▶️ Reproduzir" : "⏸ Pausar";
-    }
-
-    function updateVolume() {
-        const v = parseFloat(volumeControl.value || "1");
-        video.muted = v === 0;
-        video.volume = v;
-    }
-
-
-    // ========================================================
-    // 🖱️ 3. EVENTOS DO VÍDEO
-    // ========================================================
-
     if (videoElementsPresent) {
+
+        function showOverlay() {
+            container.classList.add("show");
+            playVideo();
+            updatePlayButton();
+            openBtn.blur();
+        }
+
+        function hideOverlay() {
+            resetVideo();
+            container.classList.remove("show");
+            openBtn.focus();
+        }
+
+        function playVideo() {
+            const attempt = video.play();
+            attempt?.catch(err => {
+                console.error("Autoplay bloqueado. Requer interação:", err);
+            });
+        }
+
+        function resetVideo() {
+            video.pause();
+            video.currentTime = 0;
+        }
+
+        function updatePlayButton() {
+            const isPaused = video.paused;
+            playPauseBtn.textContent = isPaused ? "▶️ Reproduzir" : "⏸ Pausar";
+            playPauseBtn.setAttribute(
+                "aria-label",
+                isPaused ? "Reproduzir vídeo" : "Pausar vídeo"
+            );
+        }
+
+        function updateVolume() {
+            let vol = parseFloat(volumeControl.value);
+            if (isNaN(vol)) vol = 1;
+            vol = Math.max(0, Math.min(1, vol));
+            video.volume = vol;
+            video.muted = vol === 0;
+        }
+
+        // ========================================================
+        // 🖱️ 3. EVENTOS DO VÍDEO
+        // ========================================================
 
         openBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -81,98 +88,112 @@ document.addEventListener("DOMContentLoaded", () => {
             hideOverlay();
         });
 
-        // Clique fora da caixa fecha o modal
         container.addEventListener("click", (e) => {
             if (e.target === container) hideOverlay();
         });
 
-        // Pressionar ESC fecha o modal
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape" && container.classList.contains("show")) {
                 hideOverlay();
             }
         });
 
-        // Play / Pause no botão
         playPauseBtn.addEventListener("click", () => {
             video.paused ? playVideo() : video.pause();
-            updatePlayButton();
         });
 
-        // Eventos nativos do vídeo
         video.addEventListener("play", updatePlayButton);
         video.addEventListener("pause", updatePlayButton);
         video.addEventListener("ended", updatePlayButton);
 
-        // Volume
         updateVolume();
         volumeControl.addEventListener("input", updateVolume);
 
-        // Caso o modal abra já visível
-        if (container.classList.contains("show")) {
-            updatePlayButton();
-        }
+        if (container.classList.contains("show")) updatePlayButton();
     }
 
-
     // ========================================================
-    // ⏰ 4. SISTEMA AUTOMÁTICO DE HORÁRIO DE FUNCIONAMENTO
+    // ⏰ 4. SISTEMA DE HORÁRIO DE FUNCIONAMENTO
     // ========================================================
 
     const schedule = [
-        { day: 1, open: 900, close: 1800 }, // Segunda
-        { day: 2, open: 900, close: 1800 }, // Terça
-        { day: 3, open: 900, close: 1800 }, // Quarta
-        { day: 4, open: 900, close: 1800 }, // Quinta
-        { day: 5, open: 900, close: 1800 }, // Sexta
-        { day: 6, open: 900, close: 1300 }  // Sábado
+        { day: 1, open: 800, close: 1700 },
+        { day: 2, open: 800, close: 1700 },
+        { day: 3, open: 800, close: 1700 },
+        { day: 4, open: 800, close: 1700 },
+        { day: 5, open: 800, close: 1700 },
+        { day: 6, open: 800, close: 1300 }
+    ];
+
+    const daysOfWeek = [
+        'Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira',
+        'Quinta-feira', 'Sexta-feira', 'Sábado'
     ];
 
     if (statusWidget && statusIndicator) {
 
-        function formatTime(timeInt) {
-            const hours = Math.floor(timeInt / 100);
-            const minutes = timeInt % 100;
-            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+        function formatTime(intTime) {
+            const h = Math.floor(intTime / 100);
+            const m = intTime % 100;
+            return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+        }
+
+        function findNextOpen(currentDay) {
+            for (let i = 1; i <= 7; i++) {
+                const nextDayIndex = (currentDay + i) % 7;
+                const nextDay = schedule.find(s => s.day === nextDayIndex);
+
+                if (nextDay) {
+                    return {
+                        dayName: daysOfWeek[nextDayIndex],
+                        time: formatTime(nextDay.open)
+                    };
+                }
+            }
+            return null;
         }
 
         function checkOpeningStatus() {
             const now = new Date();
             const currentDay = now.getDay();
             const currentTime = now.getHours() * 100 + now.getMinutes();
-
-            const today = schedule.find(s => s.day === currentDay);
+            const todaySchedule = schedule.find(s => s.day === currentDay);
 
             let isOpen = false;
-            let statusText = "FECHADO";
+            let status = "FECHADO";
 
-            if (today) {
-                const { open, close } = today;
+            if (todaySchedule) {
+                const { open, close } = todaySchedule;
 
-                if (currentTime >= open && currentTime < close) {
+                // ✅ Correção aplicada: inclui o minuto exato de fechamento
+                if (currentTime >= open && currentTime <= close) {
                     isOpen = true;
-                    statusText = "ABERTO AGORA";
+                    status = "ABERTO AGORA";
 
                 } else if (currentTime < open) {
-                    statusText = `FECHADO (Abre às ${formatTime(open)})`;
+                    status = `FECHADO (Abre às ${formatTime(open)})`;
 
                 } else {
-                    statusText = `FECHADO (Fechou às ${formatTime(close)})`;
+                    const next = findNextOpen(currentDay);
+                    status = next
+                        ? `FECHADO (Abre ${next.dayName} às ${next.time})`
+                        : "FECHADO (Verifique horários)";
                 }
 
             } else {
-                statusText = "FECHADO (Fim de Semana)";
+                const next = findNextOpen(currentDay);
+                status = next
+                    ? `FECHADO (Abre ${next.dayName} às ${next.time})`
+                    : "FECHADO";
             }
 
-            statusIndicator.textContent = statusText;
+            statusIndicator.textContent = status;
             statusWidget.classList.toggle("is-open", isOpen);
         }
 
-        // Executa ao carregar
         checkOpeningStatus();
-
-        // Atualiza a cada minuto
         setInterval(checkOpeningStatus, 60000);
     }
 
 });
+

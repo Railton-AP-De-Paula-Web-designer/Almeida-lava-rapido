@@ -221,33 +221,7 @@ h1, h2, h3 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(255, 255, 255, 0.1);
 }
 
-.status-indicator {
-    font-size: 2.8rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-align: center;
-    padding: 15px 20px;
-    margin-bottom: 25px;
-    border-radius: 8px;
-    background-color: #1a0000;
-    color: var(--cor-acento-vermelho);
-    border: 2px solid var(--cor-acento-vermelho);
-    box-shadow: 0 0 15px var(--cor-acento-vermelho),
-        0 0 25px var(--cor-acento-vermelho),
-        0 0 40px rgba(216, 30, 91, 0.4);
-    text-shadow: 0 0 8px rgba(216, 30, 91, 0.8),
-        0 0 15px rgba(216, 30, 91, 0.5);
-}
-
-.status-widget.is-open .status-indicator {
-    background-color: #1a1a00;
-    color: var(--cor-destaque-amarelo);
-    box-shadow: 0 0 15px var(--cor-destaque-amarelo),
-        0 0 25px var(--cor-destaque-amarelo),
-        0 0 40px rgba(255, 199, 44, 0.4);
-    text-shadow: 0 0 8px rgba(255, 199, 44, 0.8),
-        0 0 15px rgba(255, 199, 44, 0.5);
-}
+/*codigo antigo estava aki*/
 
 .schedule-details p {
     display: flex;
@@ -836,6 +810,43 @@ video {
     color: #b3b3b3;
     text-align: right;
     margin: 0;
+}
+
+#statusIndicator {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-align: center;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+
+    background-color: #1a0000;
+    color: #ff1a1a; /* Vermelho forte */
+    border: 2px solid #ff1a1a;
+
+    box-shadow: 0 0 15px #ff1a1a,
+                0 0 25px #ff1a1a,
+                0 0 40px rgba(255, 26, 26, 0.4);
+
+    text-shadow: 0 0 8px rgba(255, 26, 26, 0.8),
+                 0 0 15px rgba(255, 26, 26, 0.5);
+
+    transition: all 0.4s ease; /* animação suave */
+}
+
+/* ESTADO ABERTO — VERDE */
+#openingStatusWidget.is-open #statusIndicator {
+    background-color: #0c1a0e;
+    color: #4caf50; /* Verde padrão profissional */
+    border-color: #4caf50;
+
+    box-shadow: 0 0 15px #4caf50,
+                0 0 25px #4caf50,
+                0 0 40px rgba(76, 175, 80, 0.4);
+
+    text-shadow: 0 0 8px rgba(76, 175, 80, 0.8),
+                 0 0 15px rgba(76, 175, 80, 0.5);
 }
 
 
