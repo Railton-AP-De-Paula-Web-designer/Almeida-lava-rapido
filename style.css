@@ -604,6 +604,68 @@ video {
     text-shadow: 1 px 1px 3px rgba(0, 0, 0, 0.4);
     margin-bottom: 20px;
 }
+
+.video-presentation {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 30px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.video-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.main-video-slot {
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor-fundo-secundaria);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--cor-destaque-amarelo);
+}
+
+.open-video-btn {
+    width: 100%;
+    max-width: 350px;
+    height: 80px;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.secondary-video-slot {
+    background-color: var(--cor-fundo-secundaria);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.secondary-video-slot h3 {
+    font-size: 1.1rem;
+    color: var(--cor-destaque-amarelo);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.secondary-video {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    display: block;
+}
+
 .botao-zap {
    position: fixed;
    bottom: 30px;
@@ -847,6 +909,34 @@ video {
 
     text-shadow: 0 0 8px rgba(76, 175, 80, 0.8),
                  0 0 15px rgba(76, 175, 80, 0.5);
+}
+.address-paragraph {
+    font-style: normal;
+    text-align: center;
+
+    color: var(--cor-destaque-amarelo);
+    background-color: var(--cor-fundo-primaria);
+    padding: 15px 10px;
+    margin: 20px 0;
+    border-radius: 8px;
+    border-left: 3px solid var(--cor-destaque-amarelo);
+    box-shadow: 0 0 10px rgba(255, 199, 44, 0.3);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+.address-paragraph br {
+    display: none;
+}
+
+.address-paragraph span {
+    display: block;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    margin-top: 5px;
+}
+.hours-content {
+    padding: 20px;
 }
 
 

@@ -118,6 +118,15 @@
                 <span class="hours-time">Fechado</span>
             </p>
         </div>
+
+        <address class="address-paragraph">
+            📍 **Rua Jornalista Sebastião Macedo, 749 - Centro**
+            <br>
+            [Ribeirão Bonito], [São Paulo]
+        </address>
+
+       
+    </div>
         
         <a href="https://www.google.com/maps/search/?api=1&query=Lava+Rápido+Almeida+Ribeirão+Bonito+SP" target="_blank" class="btn-location">
             Ver Endereço no Mapa
@@ -154,32 +163,60 @@
 
     <!-- ------------------   VÍDEO COM BOTÃO DE ABRIR   ------------------ -->
 
-    <section class="video-presentation">
-        <h2>Destaque: Veja a Qualidade em Ação</h2>
+  <section class="video-presentation">
+    <h2>Destaque: Veja a Qualidade em Ação</h2>
 
-        <!-- BOTÃO PARA ABRIR O VÍDEO -->
-        <button class="open-video-btn" id="openVideoBtn">▶ Abrir Vídeo</button>
+    <div class="video-gallery">
 
-        <!-- OVERLAY DO VÍDEO -->
-        <div class="video-overlay" id="videoContainer">
-            <div class="video-box">
-
-                <button class="close-btn" id="closeVideoBtn">×</button>
-
-                <video id="myVideo" poster="./image/thumbnail-video.jpg">
-                    <source src="./image/video2.mp4" type="video/mp4">
-                    Seu navegador não suporta vídeo.
-                </video>
-
-                <div class="video-controls">
-                    <button id="playPauseBtn">Pausar</button>
-                    <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1">
-                </div>
-
-            </div>
+        <div class="main-video-slot">
+            <button class="open-video-btn" id="openVideoBtn">
+                ▶ Abrir Vídeo Institucional
+            </button>
+        </div>
+        
+        <div class="secondary-video-slot">
+            <h3>Testemunho de Cliente</h3>
+            <video id="myVideo3" controls poster="./image/thumbnail-video.jpg" class="secondary-video">
+                <source src="./image/video3.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+            </video>
+        </div>
+        
+        <div class="secondary-video-slot">
+            <h3>Polimento Rápido</h3>
+            <video id="myVideo5" controls poster="./image/thumbnail-video.jpg" class="secondary-video">
+                <source src="./image/video4.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+            </video>
         </div>
 
-    </section>
+        <div class="secondary-video-slot">
+            <h3>Lavagem Detalhada</h3>
+            <video id="myVideo4" controls poster="./image/thumbnail-video.jpg" class="secondary-video">
+                <source src="./image/video5.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+            </video>
+        </div>
+
+    </div>
+    
+    <div class="video-overlay" id="videoContainer">
+        <div class="video-box">
+
+            <button class="close-btn" id="closeVideoBtn">×</button>
+
+            <video id="myVideo" poster="./image/thumbnail-video.jpg">
+                <source src="./image/video2.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+            </video>
+
+            <div class="video-controls">
+                <button id="playPauseBtn">Pausar</button>
+                <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="1">
+            </div>
+        </div>
+    </div>
+</section>
 
     
 <footer class="footer-section">
